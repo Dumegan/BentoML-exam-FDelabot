@@ -2,7 +2,7 @@
 
 API BentoML qui prédit la chance d'admission d'un étudiant (régression linéaire) à partir de son score GRE, TOEFL, de la note de son université, etc. L'API est sécurisée par un token JWT : il faut se connecter via `/login` avant de pouvoir appeler `/predict`. Le modèle est déjà entraîné et empaqueté dans l'image Docker fournie.
 
-## Commandes pour le correcteur
+## Commandes pour exécuter le projet
 
 À exécuter dans cet ordre, depuis le dossier où se trouve cette archive.
 
@@ -47,7 +47,7 @@ Identifiants codés en dur pour la démo (`admin` / `admin123`), à des fins d'�
 
 ## Contenu de cette archive
 
-Uniquement les 4 éléments requis : `admission_prediction_service.tar`, `requirements.txt`, ce `README.md` et `tests/`. Le code source complet (`src/`, `data/`, `bentofile.yaml`, notebooks d'entraînement...) n'est pas inclus ici : il n'est pas nécessaire pour charger l'image et lancer les tests ci-dessus, le modèle étant déjà packagé dans le `.tar`. Il reste disponible dans le dépôt GitHub du projet pour consultation.
+Uniquement les 4 éléments requis : `admission_prediction_service.tar`, `requirements.txt`, ce `README.md` et `tests/`. Le code source complet (`src/`, `data/`, `bentofile.yaml`, notebooks d'entraînement...) n'est pas inclus ici.
 
 ## Structure du projet complet (dépôt source, pour référence)
 
@@ -65,22 +65,4 @@ Uniquement les 4 éléments requis : `admission_prediction_service.tar`, `requir
 ├── bentofile.yaml
 ├── requirements.txt
 └── README.md
-```
-
-## Reproduire l'entraînement (contexte, non nécessaire pour la correction)
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-
-curl -o data/raw/admission.csv https://assets-datascientest.s3.eu-west-1.amazonaws.com/MLOPS/bentoml/admission.csv
-
-python src/prepare_data.py
-python src/train_model.py
-
-bentoml build
-bentoml containerize admission_prediction_service:latest
-docker tag admission_prediction_service:<tag_genere> admission_prediction_service:latest
-docker save admission_prediction_service:latest -o admission_prediction_service.tar
 ```
