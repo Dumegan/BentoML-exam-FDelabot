@@ -1,28 +1,10 @@
 # Examen BentoML - Prédiction d'admission universitaire
 
-API BentoML qui prédit la chance d'admission d'un étudiant (régression linéaire) à partir de son score GRE, TOEFL, de la note de son université, etc. L'API est sécurisée par un token JWT : il faut se connecter via `/login` avant de pouvoir appeler `/predict`.
-
-## Structure du projet
-
-```
-├── data/
-│   ├── raw/            # admission.csv (donnees brutes)
-│   └── processed/      # X_train, X_test, y_train, y_test
-├── models/
-├── src/
-│   ├── prepare_data.py # nettoyage + split train/test
-│   ├── train_model.py  # entrainement + sauvegarde du modele dans BentoML
-│   └── service.py      # API BentoML (login + predict)
-├── tests/
-│   └── test_service.py
-├── bentofile.yaml
-├── requirements.txt
-└── README.md
-```
+API BentoML qui prédit la chance d'admission d'un étudiant (régression linéaire) à partir de son score GRE, TOEFL, de la note de son université, etc. L'API est sécurisée par un token JWT : il faut se connecter via `/login` avant de pouvoir appeler `/predict`. Le modèle est déjà entraîné et empaqueté dans l'image Docker fournie.
 
 ## Commandes pour le correcteur
 
-À exécuter dans cet ordre, depuis la racine du projet.
+À exécuter dans cet ordre, depuis le dossier où se trouve cette archive.
 
 1. Charger l'image Docker :
 
@@ -62,6 +44,28 @@ pytest -v tests/
   → renvoie `{"chance_of_admit": 0.88}`.
 
 Identifiants codés en dur pour la démo (`admin` / `admin123`), à des fins d'évaluation uniquement.
+
+## Contenu de cette archive
+
+Uniquement les 4 éléments requis : `admission_prediction_service.tar`, `requirements.txt`, ce `README.md` et `tests/`. Le code source complet (`src/`, `data/`, `bentofile.yaml`, notebooks d'entraînement...) n'est pas inclus ici : il n'est pas nécessaire pour charger l'image et lancer les tests ci-dessus, le modèle étant déjà packagé dans le `.tar`. Il reste disponible dans le dépôt GitHub du projet pour consultation.
+
+## Structure du projet complet (dépôt source, pour référence)
+
+```
+├── data/
+│   ├── raw/            # admission.csv (donnees brutes)
+│   └── processed/      # X_train, X_test, y_train, y_test
+├── models/
+├── src/
+│   ├── prepare_data.py # nettoyage + split train/test
+│   ├── train_model.py  # entrainement + sauvegarde du modele dans BentoML
+│   └── service.py      # API BentoML (login + predict)
+├── tests/
+│   └── test_service.py
+├── bentofile.yaml
+├── requirements.txt
+└── README.md
+```
 
 ## Reproduire l'entraînement (contexte, non nécessaire pour la correction)
 
