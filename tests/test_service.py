@@ -1,13 +1,10 @@
-"""Tests du service d'admission. Le conteneur Docker doit deja tourner
-sur http://localhost:3000 (voir README.md pour le demarrer)."""
-
+#Le conteneur Docker doit deja tourner sur http://localhost:3000 pour que les tests fonctionnent
 import time
-
 import pytest
 import requests
 
 BASE_URL = "http://localhost:3000"
-GOOD_CREDENTIALS = {"username": "admin", "password": "admin123"}
+GOOD_CREDENTIALS = {"username": "admin", "password": "admin123"} #credentials en dur pour l'exam
 SAMPLE_STUDENT = {
     "data": {
         "gre_score": 330,
@@ -48,7 +45,7 @@ def test_login_success():
 
 def test_login_wrong_credentials():
     response = requests.post(
-        BASE_URL + "/login", json={"username": "admin", "password": "wrong_password"}
+        BASE_URL + "/login", json={"username": "admin", "password": "azerty"}
     )
     assert response.status_code == 401
 

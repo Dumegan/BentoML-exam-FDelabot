@@ -25,7 +25,7 @@ class AdmissionInput(BaseModel):
 
 
 def require_auth(func):
-    """Middleware d'authentification: verifie le JWT avant d'appeler la methode."""
+    #Middleware d'authentification: verifie le JWT avant d'appeler la methode
 
     @functools.wraps(func)
     def wrapper(self, *args, **kwargs):
