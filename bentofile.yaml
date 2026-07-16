@@ -1,0 +1,11 @@
+service: "src.service:AdmissionService"
+description: "Service de prediction d'admission universitaire"
+labels:
+  owner: "FDelabot"
+  project: "admission_prediction"
+include:
+  - "src/"
+models:
+  - admission_lr:latest
+python:
+  requirements_txt: "./requirements.txt"
