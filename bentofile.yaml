@@ -4,7 +4,7 @@ labels:
   owner: "FDelabot"
   project: "admission_prediction"
 include:
-  - "src/"
+  - "src/service.py"
 models:
   - admission_lr:latest
 python:
